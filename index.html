@@ -3,31 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>i1.2__ Links</title>
+    <title>i1.2__ | Multi-Language</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <style>
-        :root { --bg: #090909; --card: #1a1a1a; --text: #ffffff; --accent: #ff0050; }
-        body { background-color: var(--bg); color: var(--text); font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
-        .avatar { width: 96px; height: 96px; border-radius: 50%; border: 2px solid #333; margin-bottom: 10px; }
-        h1 { font-size: 1.1rem; margin-bottom: 30px; color: #bbb; }
-        .link-container { width: 100%; max-width: 400px; }
-        .link-card { background: var(--card); display: flex; align-items: center; justify-content: center; padding: 16px; margin-bottom: 12px; text-decoration: none; color: white; border-radius: 12px; border: 1px solid #333; font-weight: bold; }
-        .link-card i { margin-right: 10px; font-size: 1.2rem; }
-        .link-card:hover { background: #222; border-color: #555; }
+        :root { --bg: #0d0d0d; --card: #161616; --text: #fafafa; --accent: #4cc9f0; }
+        body { background-color: var(--bg); color: var(--text); font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; text-align: center; }
+        
+        /* Language Switcher Style */
+        .lang-switcher { margin-bottom: 25px; }
+        .lang-btn { background: none; border: 1px solid #444; color: white; padding: 5px 10px; cursor: pointer; border-radius: 5px; margin: 0 5px; transition: 0.3s; }
+        .lang-btn.active { background: var(--accent); color: black; border-color: var(--accent); }
+
+        .avatar { width: 90px; height: 90px; border-radius: 50%; border: 2px solid var(--accent); margin-bottom: 10px; }
+        .links { width: 100%; max-width: 400px; }
+        .btn { background: var(--card); display: flex; align-items: center; justify-content: center; padding: 18px; margin-bottom: 12px; text-decoration: none; color: white; border-radius: 15px; border: 1px solid #222; font-weight: bold; }
+        
+        /* RTL support for Arabic */
+        .rtl { direction: rtl; font-family: 'Cairo', sans-serif; }
     </style>
 </head>
 <body>
+
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('ar')">AR</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    </div>
+
     <img src="https://via.placeholder.com/150" alt="i1.2__" class="avatar">
-    <h1>@i1.2__</h1>
-    <div class="link-container">
-        <a href="https://www.instagram.com/i1.2__" class="link-card">
-            <i class="fa-brands fa-instagram"></i> Instagram
+    <h1 id="user-title">@i1.2__</h1>
+
+    <div class="links">
+        <a href="https://instagram.com/i1.2__" class="btn">
+            <i class="fa-brands fa-instagram" style="margin: 0 10px;"></i> 
+            <span id="link-insta">Follow me on Instagram</span>
         </a>
-        
-        <a href="https://www.tiktok.com/@i1.2__" class="link-card">
-            <i class="fa-brands fa-tiktok"></i> TikTok
+        <a href="https://tiktok.com/@i1.2__" class="btn">
+            <i class="fa-brands fa-tiktok" style="margin: 0 10px;"></i> 
+            <span id="link-tiktok">Watch my TikToks</span>
         </a>
     </div>
+
+    <script>
+        const translations = {
+            en: { insta: "Follow me on Instagram", tiktok: "Watch my TikToks", dir: "ltr" },
+            ar: { insta: "تابعني على إنستغرام", tiktok: "شاهد مقاطع تيك توك", dir: "rtl" },
+            fr: { insta: "Suivez-moi sur Instagram", tiktok: "Voir mes TikToks", dir: "ltr" }
+        };
+
+        function setLang(lang) {
+            document.getElementById('link-insta').innerText = translations[lang].insta;
+            document.getElementById('link-tiktok').innerText = translations[lang].tiktok;
+            document.body.className = translations[lang].dir;
+            
+            // Update active button UI
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 </html>
