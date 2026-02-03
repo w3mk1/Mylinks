@@ -3,62 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>i1.2__ | Multi-Language</title>
+    <title>i1.2__ | Links</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root { --bg: #0d0d0d; --card: #161616; --text: #fafafa; --accent: #4cc9f0; }
-        body { background-color: var(--bg); color: var(--text); font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; text-align: center; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Cairo', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; transition: 0.3s; }
         
-        /* Language Switcher Style */
-        .lang-switcher { margin-bottom: 25px; }
-        .lang-btn { background: none; border: 1px solid #444; color: white; padding: 5px 10px; cursor: pointer; border-radius: 5px; margin: 0 5px; transition: 0.3s; }
-        .lang-btn.active { background: var(--accent); color: black; border-color: var(--accent); }
+        .lang-switcher { margin-bottom: 25px; display: flex; gap: 10px; }
+        .lang-btn { background: #222; border: 1px solid #444; color: white; padding: 6px 12px; cursor: pointer; border-radius: 8px; font-size: 0.9rem; }
+        .lang-btn.active { background: var(--accent); color: black; border-color: var(--accent); font-weight: bold; }
 
-        .avatar { width: 90px; height: 90px; border-radius: 50%; border: 2px solid var(--accent); margin-bottom: 10px; }
-        .links { width: 100%; max-width: 400px; }
-        .btn { background: var(--card); display: flex; align-items: center; justify-content: center; padding: 18px; margin-bottom: 12px; text-decoration: none; color: white; border-radius: 15px; border: 1px solid #222; font-weight: bold; }
+        .avatar { width: 90px; height: 90px; border-radius: 50%; border: 2px solid var(--accent); margin-bottom: 10px; object-fit: cover; }
+        h1 { font-size: 1.2rem; margin-bottom: 30px; }
         
-        /* RTL support for Arabic */
-        .rtl { direction: rtl; font-family: 'Cairo', sans-serif; }
+        .links { width: 100%; max-width: 400px; }
+        .btn { 
+            background: var(--card); display: flex; align-items: center; padding: 18px; margin-bottom: 12px; 
+            text-decoration: none; color: white; border-radius: 15px; border: 1px solid #222; 
+            transition: 0.3s; font-weight: 600; justify-content: flex-start;
+        }
+        .btn i { width: 30px; font-size: 1.3rem; margin: 0 15px; text-align: center; }
+        .btn:hover { transform: translateY(-3px); background: #222; border-color: var(--accent); }
+
+        /* تنسيق اللغة العربية */
+        .rtl { direction: rtl; }
+        .rtl .btn { justify-content: flex-start; }
     </style>
 </head>
-<body>
+<body id="body-content">
 
     <div class="lang-switcher">
-        <button class="lang-btn active" onclick="setLang('en')">EN</button>
-        <button class="lang-btn" onclick="setLang('ar')">AR</button>
-        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn active" onclick="changeLang('en', this)">English</button>
+        <button class="lang-btn" onclick="changeLang('ar', this)">العربية</button>
+        <button class="lang-btn" onclick="changeLang('fr', this)">Français</button>
     </div>
 
     <img src="https://via.placeholder.com/150" alt="i1.2__" class="avatar">
-    <h1 id="user-title">@i1.2__</h1>
+    <h1>@i1.2__</h1>
 
     <div class="links">
         <a href="https://instagram.com/i1.2__" class="btn">
-            <i class="fa-brands fa-instagram" style="margin: 0 10px;"></i> 
-            <span id="link-insta">Follow me on Instagram</span>
+            <i class="fa-brands fa-instagram" style="color: #E1306C;"></i>
+            <span id="txt-insta">Instagram</span>
         </a>
+
         <a href="https://tiktok.com/@i1.2__" class="btn">
-            <i class="fa-brands fa-tiktok" style="margin: 0 10px;"></i> 
-            <span id="link-tiktok">Watch my TikToks</span>
+            <i class="fa-brands fa-tiktok" style="color: #ff0050;"></i>
+            <span id="txt-tiktok">TikTok</span>
+        </a>
+
+        <a href="https://yourlink.com" class="btn">
+            <i class="fa-solid fa-link" style="color: var(--accent);"></i>
+            <span id="txt-custom">My Website</span>
         </a>
     </div>
 
     <script>
-        const translations = {
-            en: { insta: "Follow me on Instagram", tiktok: "Watch my TikToks", dir: "ltr" },
-            ar: { insta: "تابعني على إنستغرام", tiktok: "شاهد مقاطع تيك توك", dir: "rtl" },
-            fr: { insta: "Suivez-moi sur Instagram", tiktok: "Voir mes TikToks", dir: "ltr" }
+        const content = {
+            en: { insta: "Follow on Instagram", tiktok: "Watch on TikTok", custom: "Visit My Website", dir: "ltr" },
+            ar: { insta: "تابعني على إنستغرام", tiktok: "شاهدني على تيك توك", custom: "موقعي الشخصي", dir: "rtl" },
+            fr: { insta: "Suivre sur Instagram", tiktok: "Voir sur TikTok", custom: "Mon Site Web", dir: "ltr" }
         };
 
-        function setLang(lang) {
-            document.getElementById('link-insta').innerText = translations[lang].insta;
-            document.getElementById('link-tiktok').innerText = translations[lang].tiktok;
-            document.body.className = translations[lang].dir;
+        function changeLang(lang, btn) {
+            // تحديث النصوص
+            document.getElementById('txt-insta').innerText = content[lang].insta;
+            document.getElementById('txt-tiktok').innerText = content[lang].tiktok;
+            document.getElementById('txt-custom').innerText = content[lang].custom;
             
-            // Update active button UI
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            // تحديث اتجاه الصفحة (RTL للجزء العربي)
+            const body = document.getElementById('body-content');
+            if (content[lang].dir === "rtl") {
+                body.classList.add('rtl');
+            } else {
+                body.classList.remove('rtl');
+            }
+
+            // تحديث شكل الأزرار
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
         }
     </script>
 </body>
