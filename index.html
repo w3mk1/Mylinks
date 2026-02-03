@@ -1,89 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>i1.2__ | Links</title>
+    <title>i1.2__ | My Links</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        :root { --bg: #0d0d0d; --card: #161616; --text: #fafafa; --accent: #4cc9f0; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', 'Cairo', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; transition: 0.3s; }
+        :root { 
+            --bg: #0d0d0d; 
+            --card: #161616; 
+            --text: #fafafa; 
+            --accent: #4cc9f0; 
+        }
         
+        * { box-sizing: border-box; }
+
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: 'Segoe UI', 'Cairo', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 40px 20px; 
+            margin: 0;
+            transition: 0.3s; 
+        }
+
+        /* محول اللغة */
         .lang-switcher { margin-bottom: 25px; display: flex; gap: 10px; }
-        .lang-btn { background: #222; border: 1px solid #444; color: white; padding: 6px 12px; cursor: pointer; border-radius: 8px; font-size: 0.9rem; }
+        .lang-btn { 
+            background: #222; border: 1px solid #444; color: white; 
+            padding: 8px 15px; cursor: pointer; border-radius: 10px; 
+            font-size: 0.85rem; transition: 0.3s;
+        }
         .lang-btn.active { background: var(--accent); color: black; border-color: var(--accent); font-weight: bold; }
 
-        .avatar { width: 90px; height: 90px; border-radius: 50%; border: 2px solid var(--accent); margin-bottom: 10px; object-fit: cover; }
-        h1 { font-size: 1.2rem; margin-bottom: 30px; }
-        
+        /* الصورة الشخصية */
+        .avatar { 
+            width: 100px; height: 100px; border-radius: 50%; 
+            border: 2px solid var(--accent); margin-bottom: 15px; 
+            object-fit: cover; box-shadow: 0 0 15px rgba(76, 201, 240, 0.2);
+        }
+
+        h1 { font-size: 1.2rem; margin-bottom: 35px; letter-spacing: 1px; }
+
+        /* حاوية الروابط */
         .links { width: 100%; max-width: 400px; }
         .btn { 
-            background: var(--card); display: flex; align-items: center; padding: 18px; margin-bottom: 12px; 
-            text-decoration: none; color: white; border-radius: 15px; border: 1px solid #222; 
-            transition: 0.3s; font-weight: 600; justify-content: flex-start;
+            background: var(--card); display: flex; align-items: center; 
+            padding: 18px; margin-bottom: 15px; text-decoration: none; 
+            color: white; border-radius: 16px; border: 1px solid #222; 
+            transition: 0.3s ease; font-weight: 600;
         }
-        .btn i { width: 30px; font-size: 1.3rem; margin: 0 15px; text-align: center; }
-        .btn:hover { transform: translateY(-3px); background: #222; border-color: var(--accent); }
+        
+        .btn i { width: 35px; font-size: 1.4rem; margin: 0 10px; text-align: center; }
+        
+        /* تأثير عند تمرير الفأرة */
+        .btn:hover { 
+            transform: translateY(-4px); 
+            background: #1f1f1f; 
+            border-color: var(--accent);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
 
-        /* تنسيق اللغة العربية */
+        /* تنسيق الاتجاه للعربية */
         .rtl { direction: rtl; }
-        .rtl .btn { justify-content: flex-start; }
     </style>
 </head>
-<body id="body-content">
+<body id="main-body">
 
     <div class="lang-switcher">
-        <button class="lang-btn active" onclick="changeLang('en', this)">English</button>
-        <button class="lang-btn" onclick="changeLang('ar', this)">العربية</button>
-        <button class="lang-btn" onclick="changeLang('fr', this)">Français</button>
+        <button class="lang-btn active" onclick="updateLang('en', this)">English</button>
+        <button class="lang-btn" onclick="updateLang('ar', this)">العربية</button>
+        <button class="lang-btn" onclick="updateLang('fr', this)">Français</button>
     </div>
 
     <img src="https://via.placeholder.com/150" alt="i1.2__" class="avatar">
+    
     <h1>@i1.2__</h1>
 
     <div class="links">
-        <a href="https://instagram.com/i1.2__" class="btn">
+        <a href="https://instagram.com/i1.2__" target="_blank" class="btn">
             <i class="fa-brands fa-instagram" style="color: #E1306C;"></i>
-            <span id="txt-insta">Instagram</span>
+            <span id="label-insta">Follow on Instagram</span>
         </a>
 
-        <a href="https://tiktok.com/@i1.2__" class="btn">
+        <a href="https://tiktok.com/@i1.2__" target="_blank" class="btn">
             <i class="fa-brands fa-tiktok" style="color: #ff0050;"></i>
-            <span id="txt-tiktok">TikTok</span>
+            <span id="label-tiktok">Watch on TikTok</span>
         </a>
 
-        <a href="https://yourlink.com" class="btn">
-            <i class="fa-solid fa-link" style="color: var(--accent);"></i>
-            <span id="txt-custom">My Website</span>
+        <a href="#" target="_blank" class="btn">
+            <i class="fa-solid fa-envelope" style="color: var(--accent);"></i>
+            <span id="label-extra">Contact Me</span>
         </a>
     </div>
 
     <script>
-        const content = {
-            en: { insta: "Follow on Instagram", tiktok: "Watch on TikTok", custom: "Visit My Website", dir: "ltr" },
-            ar: { insta: "تابعني على إنستغرام", tiktok: "شاهدني على تيك توك", custom: "موقعي الشخصي", dir: "rtl" },
-            fr: { insta: "Suivre sur Instagram", tiktok: "Voir sur TikTok", custom: "Mon Site Web", dir: "ltr" }
+        const translations = {
+            en: { 
+                insta: "Follow on Instagram", 
+                tiktok: "Watch on TikTok", 
+                extra: "Contact Me", 
+                dir: "ltr" 
+            },
+            ar: { 
+                insta: "تابعني على إنستغرام", 
+                tiktok: "شاهدني على تيك توك", 
+                extra: "تواصل معي", 
+                dir: "rtl" 
+            },
+            fr: { 
+                insta: "Suivre sur Instagram", 
+                tiktok: "Voir sur TikTok", 
+                extra: "Contactez-moi", 
+                dir: "ltr" 
+            }
         };
 
-        function changeLang(lang, btn) {
-            // تحديث النصوص
-            document.getElementById('txt-insta').innerText = content[lang].insta;
-            document.getElementById('txt-tiktok').innerText = content[lang].tiktok;
-            document.getElementById('txt-custom').innerText = content[lang].custom;
-            
-            // تحديث اتجاه الصفحة (RTL للجزء العربي)
-            const body = document.getElementById('body-content');
-            if (content[lang].dir === "rtl") {
-                body.classList.add('rtl');
-            } else {
-                body.classList.remove('rtl');
-            }
+        function updateLang(lang, button) {
+            // تحديث النصوص في الصفحة
+            document.getElementById('label-insta').innerText = translations[lang].insta;
+            document.getElementById('label-tiktok').innerText = translations[lang].tiktok;
+            document.getElementById('label-extra').innerText = translations[lang].extra;
 
-            // تحديث شكل الأزرار
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            // تغيير اتجاه الصفحة
+            const body = document.getElementById('main-body');
+            body.className = translations[lang].dir === "rtl" ? "rtl" : "";
+
+            // تحديث حالة الأزرار
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
         }
     </script>
 </body>
